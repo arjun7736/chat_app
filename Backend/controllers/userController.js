@@ -7,12 +7,12 @@ const signUp = async (req, res) => {
         const { username, phone, password } = req.body;
         if (!username.trim()) return res.status(400).json({ message: "Username Cannot Be Empty" })
         if (!password.trim()) return res.status(400).json({ message: "Password Cannot Be Empty" })
-        if (!phone.length===0) return res.status(400).json({ message: "Phone Cannot Be Empty" })
-            const existusername = await User.findOne({ username })
+        if (!phone.length === 0) return res.status(400).json({ message: "Phone Cannot Be Empty" })
+        const existusername = await User.findOne({ username })
         if (existusername) {
             return res.status(400).json({ message: "Usernmae Already Exist" })
         }
-        const existPhone=await  User.findOne({ phone });
+        const existPhone = await User.findOne({ phone });
         if (existPhone) {
             return res.status(400).json({ message: "phone Already Exist" })
         }
@@ -44,4 +44,7 @@ const login = async (req, res) => {
     }
 }
 
-export { login, signUp }
+const logOut = async (req, res) => {
+    res.clearCookie('access_token').status(200).json("Logout Succesfully")
+}
+export { login, signUp,logOut }
