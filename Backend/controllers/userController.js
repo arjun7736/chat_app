@@ -47,4 +47,15 @@ const login = async (req, res) => {
 const logOut = async (req, res) => {
     res.clearCookie('access_token').status(200).json("Logout Succesfully")
 }
-export { login, signUp,logOut }
+
+const fetchUser = async(req, res) => {
+    try {
+        const user =await User.find({}).select('-password');
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+export { login, signUp, logOut, fetchUser }
