@@ -51,6 +51,7 @@ const logOut = async (req, res) => {
 const fetchUser = async(req, res) => {
     try {
         const user =await User.find({}).select('-password');
+        res.status(200).json(user)
     } catch (error) {
         console.log(error)
     }
